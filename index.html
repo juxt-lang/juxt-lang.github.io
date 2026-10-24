@@ -778,12 +778,22 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 .ps-teams h3{font-size:22px;margin:8px 0}.ps-teams p{margin:0;color:#2B2B2B}.ps-teams .label b{background:#111;color:#F7DF1E;border-radius:999px;padding:2px 8px}
 .ps-teams-b{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}.ps-teams .btn{background:#fff;border-color:#111;color:#111}.ps-teams .btn.primary{background:#111;color:#F7DF1E}
 @media (max-width:820px){.ps-teams{grid-template-columns:1fr}.ps-teams-b{justify-content:flex-start}}
+.ps-one{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:28px}
+.ps-one-l{background:#111;color:#fff;border-radius:var(--r);padding:28px}
+.ps-one-l .label{color:#bdbdbd}.ps-one-l .label b{color:#111;background:#F7DF1E;border-radius:999px;padding:2px 8px}
+.ps-cmd{display:flex;align-items:center;gap:12px;margin:16px 0;flex-wrap:wrap}
+.ps-cmd code{font:700 clamp(22px,3.2vw,34px) var(--f-mono);color:#F7DF1E;letter-spacing:-.01em}
+.ps-cmd .btn{background:#F7DF1E;color:#111;border-color:#F7DF1E}
+.ps-one-l p{margin:0;color:#e6e6e6;font-size:16px}
+.ps-one-r{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:#fff}.ps-one-r h3{margin:0 0 10px;font-size:18px}
+.ps-one-r .ps-t td:first-child{white-space:nowrap}
+@media (max-width:820px){.ps-one{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <a class="ps-strip" href="#/php2shell"><b>Security update</b> PHP2Shell (CVE-2026-109618/9) is being exploited. Fix it with your AI agent, safely <span aria-hidden="true">→</span></a>
+  <a class="ps-strip" href="#/php2shell"><b>Security update</b> PHP2Shell (CVE-2026-109618/9) is being exploited. Fix it in one command: <code style="color:#F7DF1E;font-family:var(--f-mono)">npx juxt-lang php2shell</code> <span aria-hidden="true">→</span></a>
 <nav class="top" aria-label="Main">
     <a class="brand" href="#/" aria-label="Juxt home">
       <svg class="jmark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#111111"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#F7DF1E" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19" cy="9.5" r="3" fill="#F7DF1E"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#F7DF1E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
@@ -1535,48 +1545,25 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
     <div class="sec-head rv">
       <div class="label"><b>Security update</b> · CVE-2026-109618 · CVE-2026-109619 · October 2026</div>
       <h2>PHP2Shell: let your AI fix it, <em class="s">safely.</em></h2>
-      <p class="ct-lede">Two critical PHP flaws let attackers run code on web servers without logging in, and they are being exploited now. Updating PHP is the only fix. This free Juxt program has your AI agent find every PHP that serves your site, show you what it found, ask before it changes anything, then prove the fix worked.</p>
+      <p class="ct-lede">Two critical PHP flaws let attackers run code on web servers without logging in, and they are being exploited now. Updating PHP is the only fix. One command has your AI agent find every PHP that serves your site, ask before it changes anything, then prove the fix worked.</p>
     </div>
-    <div class="ps-steps">
-      <div class="card ps-step"><b>1</b><h3>Add Juxt to the repo</h3><code>npx juxt-lang init</code><p>Installs the Juxt skill for Codex, Claude Code, Cursor or Gemini CLI.</p></div>
-      <div class="card ps-step"><b>2</b><h3>Add the fix program</h3><code>npx juxt-lang fix php2shell</code><p>Writes <code>juxt/php2shell.juxt</code>, shown below.</p></div>
-      <div class="card ps-step"><b>3</b><h3>Tell your agent</h3><code>use juxt: run juxt/php2shell.juxt</code><p>It reports, asks for your OK, updates, restarts and verifies.</p></div>
-    </div>
-    <div class="ps-run2">
-      <div class="card ps-card">
-        <h3>Paste it into your AI</h3>
-        <p class="ps-mute">The fix is a Juxt program. It carries its own instructions, so it runs in Claude Code, Codex, Cursor, Gemini CLI or any agent that can run commands, with nothing to install.</p>
-        <div class="ps-msg"><pre>@juxt 3.4
-# PHP2Shell fix · CVE-2026-109618, CVE-2026-109619
-agent scout, planner, patcher, verifier
-topology: pipeline(scout -&gt; planner -&gt; approval -&gt; patcher -&gt; verifier)
-policy: read-only until the plan is approved
-…full program below</pre><button class="btn primary" id="psCopy2" type="button">Copy the Juxt program</button></div>
-        <p class="ps-mute" style="margin-top:12px">With Juxt installed, it's one line: <code>use juxt: run juxt/php2shell.juxt</code>. Claude Code plugin: <code>/plugin marketplace add juxt-lang/juxt</code> then <code>/plugin install juxt@juxt-lang</code>.</p>
+    <div class="ps-one">
+      <div class="ps-one-l">
+        <div class="label"><b>One command</b> · in your project folder or on the server</div>
+        <div class="ps-cmd"><code id="psCmd">npx juxt-lang php2shell</code><button class="btn" id="psCmdCp" type="button">Copy</button></div>
+        <p>It finds your AI agent (Claude Code, Codex, Gemini CLI or Cursor), sets up Juxt and starts the fix. The agent shows what it found and <b>asks before changing anything</b>.</p>
       </div>
-      <div class="card ps-card">
-        <h3>Or run it from a terminal</h3>
-        <div class="ps-tabs" role="tablist"><button class="ps-tab" type="button" role="tab" aria-selected="true" data-i="0">Claude Code</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="1">Codex</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="2">Gemini CLI</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="3">Cursor</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="4">No Node on the server</button></div>
-        <div class="ps-pane"><pre>cd your-project
-npx -y juxt-lang init --host claude
-npx -y juxt-lang fix php2shell
-claude &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
-npx -y juxt-lang init
-npx -y juxt-lang fix php2shell
-codex &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
-npx -y juxt-lang init --host gemini
-npx -y juxt-lang fix php2shell
-gemini -i &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
-npx -y juxt-lang init --host cursor
-npx -y juxt-lang fix php2shell
-# then in Cursor&#x27;s agent chat:
-use juxt: run juxt/php2shell.juxt</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>curl -fsSLo php2shell.juxt https://raw.githubusercontent.com/juxt-lang/juxt/main/examples/php2shell.juxt
-# paste the file into your AI agent, or:
-claude &quot;Follow this Juxt program exactly: $(cat php2shell.juxt)&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div>
-        <p class="ps-mute" style="margin-top:10px">Needs Node 18 or newer for <code>npx</code>. The agent always asks before it changes anything.</p>
+      <div class="ps-one-r">
+        <h3>Options, if you need them</h3>
+        <table class="ps-t">
+          <tr><td>--agent codex</td><td>Pick the agent: claude, codex, gemini or cursor</td></tr>
+          <tr><td>--print</td><td>Print the Juxt program to paste into any AI chat</td></tr>
+          <tr><td>--no-launch</td><td>Only write juxt/php2shell.juxt</td></tr>
+        </table>
+        <p class="ps-mute" style="margin:12px 0 0"><b>In an AI chat?</b> Type: <code>Run npx juxt-lang php2shell --print and follow it</code></p>
       </div>
     </div>
-    <p class="ps-alt"><b>How it runs:</b> four agents in a pipeline. The scout inventories every PHP surface, the planner ranks fixes by exposure and hands you the exact commands, the patcher applies only what you approve, and a verifier with fresh context proves the result.</p>
+    <p class="ps-alt"><b>What runs:</b> a Juxt program with four agents in a pipeline. The scout inventories every PHP surface, the planner ranks fixes by exposure and hands you the exact commands, the patcher applies only what you approve, and a verifier with fresh context proves the result.</p>
     <div class="card ps-prog">
       <div class="ps-bar"><span>juxt/php2shell.juxt</span><button class="btn" id="psCopy" type="button">Copy program</button></div>
       <pre id="psCode">@juxt 3.4
@@ -2658,7 +2645,7 @@ if(f){f.addEventListener("submit",function(e){e.preventDefault();location.href=b
  f.querySelectorAll("[data-via]").forEach(function(btn){btn.addEventListener("click",function(){window.open(build()[btn.dataset.via],"_blank","noopener");});});}
 })();</script>
 <script>(function(){function cp(btn,txt,lbl){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){btn.textContent="Copied";setTimeout(function(){btn.textContent=lbl;},1600);},function(){prompt("Copy:",txt);});}
-var b=document.getElementById("psCopy"),c=document.getElementById("psCode");if(b&&c)b.addEventListener("click",function(){cp(b,c.textContent,"Copy program");});var b2=document.getElementById("psCopy2");if(b2&&c)b2.addEventListener("click",function(){cp(b2,c.textContent,"Copy the Juxt program");});
+var b=document.getElementById("psCopy"),c=document.getElementById("psCode");if(b&&c)b.addEventListener("click",function(){cp(b,c.textContent,"Copy program");});var b3=document.getElementById("psCmdCp");if(b3)b3.addEventListener("click",function(){cp(b3,"npx juxt-lang php2shell","Copy");});var b2=document.getElementById("psCopy2");if(b2&&c)b2.addEventListener("click",function(){cp(b2,c.textContent,"Copy the Juxt program");});
 var l=document.getElementById("psLink");if(l)l.addEventListener("click",function(){cp(l,"https://juxt-lang.github.io/#/php2shell","Copy link");});})();</script>
 <script>(function(){var r=document.getElementById("php2shell");if(!r)return;
 var t=[].slice.call(r.querySelectorAll(".ps-tab")),p=[].slice.call(r.querySelectorAll(".ps-pane"));
