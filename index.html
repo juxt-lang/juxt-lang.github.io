@@ -802,8 +802,11 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 .lx-win{background:#111;border-radius:16px;overflow:hidden;border:1px solid #111}
 .lx-bar{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;background:#1D1D1D;color:#cfcfcf;font:500 12.5px var(--f-mono);flex-wrap:wrap}
 .lx-code{margin:0;padding:16px 18px;color:#EDEDED;font:500 13px/1.62 var(--f-mono);white-space:pre-wrap;word-break:break-word;background:#111}
-.lx-code .k{color:#F7DF1E;font-weight:700}.lx-code .lv{color:#FF8D5C;font-weight:700}.lx-code .s{color:#9BE3B8;font-family:inherit;font-style:normal;letter-spacing:0}
-.lx-code .c{color:#8A8A8A;font-style:italic}.lx-code .o{color:#F7DF1E}.lx-code .u{color:#C9B6FF}.lx-code .n{color:#7FD1FF}
+.lx-code .k{color:#F7DF1E;font-weight:700}.lx-code .lv{color:#FF8D5C;font-weight:700}.lx-code .lvn{color:#FF5A4E;font-weight:700}.lx-code .lvs{color:#FFC46B;font-weight:700}.lx-code .lvo{color:#C9B6FF;font-weight:700}.lx-code .s{color:#9BE3B8;font-family:inherit;font-style:normal;letter-spacing:0}.lx-code .m{color:#FFD58A}.lx-code .f{color:#7FD1FF}.lx-code .er{color:#FF5A4E;font-weight:700}.lx-code .ok{color:#9BE3B8;font-weight:700}
+.lx-code .c{color:#8A8A8A;font-style:italic}.lx-code .o{color:#F7DF1E}.lx-code .u{color:#8EC5FF}.lx-code .n{color:#7FD1FF}
+.lx-code .pr{display:inline-flex;align-items:center;gap:6px;margin-right:8px;color:#F7DF1E;font-weight:700;user-select:none}.lx-code .pr svg{width:16px;height:16px;vertical-align:-3px}
+.lx-ttl{display:inline-flex;align-items:center;gap:8px}.lx-jx{width:18px;height:18px;flex:none}
+.lx-pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.lx-pal span{display:flex;align-items:center;gap:8px;background:#111;border-radius:10px;padding:9px 12px}.lx-pal i{width:12px;height:12px;border-radius:50%;flex:none}.lx-pal code{font:700 13px var(--f-mono)}.lx-pal em{font-style:normal;color:#bdbdbd;font-size:12px;margin-left:auto}
 .lx-mini{font-size:12.5px;padding:12px 14px;border-radius:10px;margin-top:8px}
 .lx-notes{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:n}
 .lx-notes li{counter-increment:n;display:grid;grid-template-columns:auto 1fr;column-gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
@@ -857,7 +860,9 @@ td.num{font-family:var(--f-mono);white-space:nowrap;text-align:right}
 .lx-tab[aria-selected="true"]{background:#F7DF1E;color:#111;border-color:#F7DF1E}
 .lx-src{max-height:none}
 @media (max-width:900px){.lx-tour,.lx-g2,.lx-g2w,.lx-g3{grid-template-columns:1fr}}
-/*LX-CSS-END*/</style>
+/*LX-CSS-END*/.ps-pr{display:inline-flex;align-items:center;gap:8px;margin-right:12px;user-select:none}.ps-pr .lx-jx{width:28px;height:28px}
+#psCode.lx-code{background:transparent;padding:18px 20px}
+</style>
 </head>
 <body>
 
@@ -1165,7 +1170,7 @@ I haven't written any code yet.</span></pre>
       <h2>A complete Juxt program, <em class="s">read in a minute.</em></h2>
       <p class="lx-lede">Juxt is a declarative language for directing AI agents. You state the outcome, the rules, the interface, the team and the proof. The runtime, whether a coding agent or the Juxt gateway, turns that into exactly the context each model needs, and nothing it doesn't.</p></div>
     <div class="lx-tour">
-      <div class="lx-win"><div class="lx-bar"><span>ratelimit.juxt</span><span>372 tokens · estimated</span></div><pre class="lx-code" data-jx>@juxt 3.4
+      <div class="lx-win"><div class="lx-bar"><span class="lx-ttl"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>ratelimit.juxt</span><span>372 tokens · estimated</span></div><pre class="lx-code" data-jx>@juxt 3.4
 # Rate-limit the public API without ever throttling billing
 extends: org/payments-base.juxt
 
@@ -1270,6 +1275,7 @@ receipts: on
         <tr><td><code>if</code> / <code>unless</code></td><td>conditions</td></tr><tr><td><code>when</code></td><td>output condition</td></tr>
         <tr><td><code>&lt; &lt;= = &gt;=</code></td><td>comparisons in checks</td></tr><tr><td><code>|</code></td><td>alternatives</td></tr></tbody></table></div>
     </div>
+<div class="card lx-card" style="margin-top:16px"><h3>The Juxt colour theme</h3><p class="lx-note" style="margin:0 0 12px!important">Used for every code sample on this site, and recommended for editors.</p><div class="lx-pal"><span><i style="background:#F7DF1E"></i><code style="color:#F7DF1E">objective:</code><em>block keyword</em></span><span><i style="background:#7FD1FF"></i><code style="color:#7FD1FF">reviewer</code><em>block label</em></span><span><i style="background:#FF5A4E"></i><code style="color:#FF5A4E">MUST NOT</code><em>prohibition</em></span><span><i style="background:#FF8D5C"></i><code style="color:#FF8D5C">MUST</code><em>requirement</em></span><span><i style="background:#FFC46B"></i><code style="color:#FFC46B">SHOULD</code><em>preference</em></span><span><i style="background:#C9B6FF"></i><code style="color:#C9B6FF">OPEN</code><em>question</em></span><span><i style="background:#9BE3B8"></i><code style="color:#9BE3B8">"text"</code><em>string</em></span><span><i style="background:#F7DF1E"></i><code style="color:#F7DF1E">=&gt;  -&gt;  ~&gt;</code><em>operator</em></span><span><i style="background:#8EC5FF"></i><code style="color:#8EC5FF">mcp://  a2a://</code><em>URI</em></span><span><i style="background:#FFD58A"></i><code style="color:#FFD58A">48h  $3  200k</code><em>number, unit</em></span><span><i style="background:#8A8A8A"></i><code style="color:#8A8A8A"># note</code><em>comment</em></span></div></div>
     <div class="card lx-card" style="margin-top:16px"><h3>Static rules the compiler enforces</h3><div class="lx-g2">
       <ol class="lx-ul"><li>The first line is <code>@juxt &lt;version&gt;</code>.</li><li>A task program has exactly one <code>objective</code>.</li><li>A task program has at least one <code>verify</code> check.</li><li>Every constraint starts with MUST, MUST NOT, SHOULD or OPEN, and has rule text.</li></ol>
       <ol class="lx-ul" start="5"><li>Unresolved <code>OPEN</code> items are reported, so they are asked, never guessed.</li><li>Constraints outrank the objective.</li><li>Every handoff names its payload.</li><li>Policy is enforced by the harness, not only by the prompt.</li></ol></div></div>
@@ -1282,7 +1288,7 @@ receipts: on
       <p class="lx-lede">The compiler is zero-dependency JavaScript: a line lexer, a block parser that understands labels and two-word keywords, a checker for the static rules, and an intermediate representation (IR) that host adapters turn into skills, subagents or a prompt frame for any model.</p></div>
     <div class="card lx-dia"><svg class="lx-svg" viewBox="0 0 1100 300" role="img" aria-label="Juxt compiler pipeline: source, lexer, parser, checker, IR, backends"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></defs><rect x="20" y="40" width="150" height="70" rx="12" fill="#fff" stroke="#111" stroke-width="1.6"/><text x="95.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#111">Source</text><text x="95.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#6b6b6b">.juxt text</text><rect x="200" y="40" width="150" height="70" rx="12" fill="#fff" stroke="#111" stroke-width="1.6"/><text x="275.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#111">Lexer</text><text x="275.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#6b6b6b">lines, indents</text><line x1="170" y1="75" x2="198" y2="75" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/><rect x="380" y="40" width="150" height="70" rx="12" fill="#fff" stroke="#111" stroke-width="1.6"/><text x="455.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#111">Parser</text><text x="455.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#6b6b6b">blocks, labels</text><line x1="350" y1="75" x2="378" y2="75" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/><rect x="560" y="40" width="150" height="70" rx="12" fill="#fff" stroke="#111" stroke-width="1.6"/><text x="635.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#111">Checker</text><text x="635.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#6b6b6b">8 static rules</text><line x1="530" y1="75" x2="558" y2="75" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/><rect x="740" y="40" width="150" height="70" rx="12" fill="#111" stroke="#111" stroke-width="1.6"/><text x="815.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#F7DF1E">IR</text><text x="815.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#cfcfcf">typed JSON</text><line x1="710" y1="75" x2="738" y2="75" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/><rect x="920" y="40" width="150" height="70" rx="12" fill="#fff" stroke="#111" stroke-width="1.6"/><text x="995.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="d1" fill="#111">Backends</text><text x="995.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="d2" fill="#6b6b6b">host adapters</text><line x1="890" y1="75" x2="918" y2="75" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/><rect x="20" y="150" width="690" height="120" rx="14" fill="#FFF6B8" stroke="#111" stroke-width="1.2" stroke-dasharray="5 5"/><text x="40" y="178" class="d1">Diagnostics</text><text x="40" y="202" class="d2">file:line  level  message, e.g.</text><text x="40" y="226" class="d4">bad.juxt:2  error  a program with an objective needs a verify check</text><text x="40" y="248" class="d4">exit 1 on errors, so CI fails the pull request</text><rect x="770" y="140" width="310" height="30" rx="8" fill="#fff" stroke="#111" stroke-width="1.2"/><text x="786" y="159" class="d1" style="font-size:13px">Claude Code</text><text x="1066" y="159" text-anchor="end" class="d2">skill + plugin</text><rect x="770" y="178" width="310" height="30" rx="8" fill="#fff" stroke="#111" stroke-width="1.2"/><text x="786" y="197" class="d1" style="font-size:13px">Agent Skills</text><text x="1066" y="197" text-anchor="end" class="d2">Codex, Cursor, Gemini</text><rect x="770" y="216" width="310" height="30" rx="8" fill="#fff" stroke="#111" stroke-width="1.2"/><text x="786" y="235" class="d1" style="font-size:13px">Prompt frame</text><text x="1066" y="235" text-anchor="end" class="d2">any model</text><rect x="770" y="254" width="310" height="30" rx="8" fill="#fff" stroke="#111" stroke-width="1.2" stroke-dasharray="4 4"/><text x="786" y="273" class="d1" style="font-size:13px">Gateway</text><text x="1066" y="273" text-anchor="end" class="d2">roadmap</text><path d="M995 110 V128" stroke="#111" stroke-width="1.6" marker-end="url(#ah)"/></svg></div><p class="lx-hint">Swipe the diagram sideways to see all of it.</p>
     <div class="lx-g2" style="margin-top:16px">
-      <div class="lx-win"><div class="lx-bar"><span>npx juxt-lang ir ratelimit.juxt</span><span>excerpt</span></div><pre class="lx-code lx-json" data-jx>{
+      <div class="lx-win"><div class="lx-bar"><span class="lx-ttl"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>juxt ir ratelimit.juxt</span><span>excerpt</span></div><pre class="lx-code lx-json" data-lang="json">{
   &quot;juxt&quot;: &quot;3.4&quot;,
   &quot;kind&quot;: &quot;task&quot;,
   &quot;blocks&quot;: {
@@ -1303,7 +1309,7 @@ receipts: on
     ]
   }
 }</pre></div>
-      <div><div class="lx-win"><div class="lx-bar"><span>npx juxt-lang lint bad.juxt</span><span>real output</span></div><pre class="lx-code lx-term">bad.juxt:2  error  a program with an objective needs at least one verify check
+      <div><div class="lx-win"><div class="lx-bar"><span class="lx-ttl"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>juxt lint bad.juxt</span><span>real output</span></div><pre class="lx-code lx-term" data-lang="diag">bad.juxt:2  error  a program with an objective needs at least one verify check
 bad.juxt:4  error  constraint must start with MUST, MUST NOT, SHOULD or OPEN: &quot;MAYBE later&quot;
 
 1 file(s), 2 error(s), 0 warning(s)</pre></div>
@@ -1363,11 +1369,11 @@ bad.juxt:4  error  constraint must start with MUST, MUST NOT, SHOULD or OPEN: &q
       <h2>One npm package. <em class="s">Every stack.</em></h2>
       <p class="lx-lede">The <a href="https://www.npmjs.com/package/juxt-lang" target="_blank" rel="noopener"><code>juxt-lang</code></a> package is the compiler and the CLI: zero dependencies, Node 18 or newer, published with npm provenance. JavaScript imports it directly. Python, Rust and anything else call its JSON output today; native packages are on the roadmap.</p></div>
     <div class="lx-g2w">
-      <div class="lx-win"><div class="lx-bar lx-tabs" role="tablist"><button class="lx-tab" role="tab" aria-selected="true" data-i="0" type="button">Terminal</button><button class="lx-tab" role="tab" aria-selected="false" data-i="1" type="button">JavaScript</button><button class="lx-tab" role="tab" aria-selected="false" data-i="2" type="button">Python</button><button class="lx-tab" role="tab" aria-selected="false" data-i="3" type="button">Rust</button><button class="lx-tab" role="tab" aria-selected="false" data-i="4" type="button">CI</button></div><div class="lx-pane"><pre class="lx-code lx-src">npx juxt-lang init                 # add Juxt mode to any agent
+      <div class="lx-win"><div class="lx-bar lx-tabs" role="tablist"><span class="lx-ttl"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg></span><button class="lx-tab" role="tab" aria-selected="true" data-i="0" type="button">Terminal</button><button class="lx-tab" role="tab" aria-selected="false" data-i="1" type="button">JavaScript</button><button class="lx-tab" role="tab" aria-selected="false" data-i="2" type="button">Python</button><button class="lx-tab" role="tab" aria-selected="false" data-i="3" type="button">Rust</button><button class="lx-tab" role="tab" aria-selected="false" data-i="4" type="button">CI</button></div><div class="lx-pane"><pre class="lx-code lx-src" data-lang="sh">npx juxt-lang init                 # add Juxt mode to any agent
 npx juxt-lang lint                 # check juxt/*.juxt
 npx juxt-lang ir  file.juxt        # typed JSON for your tools
 npx juxt-lang php2shell            # a ready-made fix, one command
-npx juxt-lang digest 1d            # what changed, from git, 0 tokens</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src">// npm i juxt-lang
+npx juxt-lang digest 1d            # what changed, from git, 0 tokens</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src" data-lang="js">// npm i juxt-lang
 const { lint, toIR } = require(&#x27;juxt-lang&#x27;);
 const fs = require(&#x27;fs&#x27;);
 
@@ -1377,7 +1383,7 @@ if (diags.some(d =&gt; d.level === &#x27;error&#x27;)) process.exit(1);
 
 const ir = toIR(prog);
 const musts = ir.blocks.constraints.filter(c =&gt; c.level.startsWith(&#x27;MUST&#x27;));
-console.log(`${musts.length} hard rules for the reviewer`);</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src"># Python 3.8+, uses the npm compiler. No extra packages.
+console.log(`${musts.length} hard rules for the reviewer`);</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src" data-lang="py"># Python 3.8+, uses the npm compiler. No extra packages.
 import json, subprocess
 
 def juxt_ir(path: str) -&gt; dict:
@@ -1395,7 +1401,7 @@ for c in ir[&quot;blocks&quot;][&quot;constraints&quot;]:
 
 # Build a system prompt for any model, rules first
 rules = &quot;\n&quot;.join(f&#x27;{c[&quot;level&quot;]}: {c[&quot;rule&quot;]}&#x27; for c in ir[&quot;blocks&quot;][&quot;constraints&quot;])
-system = f&quot;Follow these rules before the objective.\n{rules}\nObjective: {ir[&#x27;blocks&#x27;][&#x27;objective&#x27;]}&quot;</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src">// Cargo.toml: serde_json = &quot;1&quot;
+system = f&quot;Follow these rules before the objective.\n{rules}\nObjective: {ir[&#x27;blocks&#x27;][&#x27;objective&#x27;]}&quot;</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src" data-lang="rs">// Cargo.toml: serde_json = &quot;1&quot;
 use std::process::Command;
 use serde_json::Value;
 
@@ -1415,7 +1421,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
         println!(&quot;{} - {}&quot;, c[&quot;level&quot;].as_str().unwrap(), c[&quot;rule&quot;].as_str().unwrap());
     }
     Ok(())
-}</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src"># .github/workflows/juxt.yml
+}</pre></div><div class="lx-pane" hidden><pre class="lx-code lx-src" data-lang="yml"># .github/workflows/juxt.yml
 on: [pull_request]
 jobs:
   juxt:
@@ -1896,7 +1902,7 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
     <div class="ps-one">
       <div class="ps-one-l">
         <div class="label"><b>One command</b> · in your project folder or on the server</div>
-        <div class="ps-cmd"><code id="psCmd">npx juxt-lang php2shell</code><button class="btn" id="psCmdCp" type="button">Copy</button></div>
+        <div class="ps-cmd"><code id="psCmd"><span class="ps-pr"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>❯</span>npx juxt-lang php2shell</code><button class="btn" id="psCmdCp" type="button">Copy</button></div>
         <p>It finds your AI agent (Claude Code, Codex, Gemini CLI or Cursor), sets up Juxt and starts the fix. The agent shows what it found and <b>asks before changing anything</b>.</p>
       </div>
       <div class="ps-one-r">
@@ -1911,8 +1917,8 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
     </div>
     <p class="ps-alt"><b>What runs:</b> a Juxt program with four agents in a pipeline. The scout inventories every PHP surface, the planner ranks fixes by exposure and hands you the exact commands, the patcher applies only what you approve, and a verifier with fresh context proves the result.</p>
     <div class="card ps-prog">
-      <div class="ps-bar"><span>juxt/php2shell.juxt</span><button class="btn" id="psCopy" type="button">Copy program</button></div>
-      <pre id="psCode">@juxt 3.4
+      <div class="ps-bar"><span class="lx-ttl"><svg class="lx-jx" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>juxt/php2shell.juxt</span><button class="btn" id="psCopy" type="button">Copy program</button></div>
+      <pre id="psCode" class="lx-code" data-jx>@juxt 3.4
 # PHP2Shell fix · CVE-2026-109618, CVE-2026-109619 · critical, exploited in the wild
 # This is a Juxt program (juxt-lang.github.io). AI agent: you are its runtime.
 # Run it block by block. Constraints outrank the objective. Ask every OPEN item; never guess.
@@ -3031,23 +3037,46 @@ r.querySelectorAll(".ps-cp").forEach(function(b){var l=b.textContent;b.addEventL
 
 
 
+
+
+
+
 <!--LX-JS--><script>(function(){
 var KW=/^(\s*)(@juxt|[a-z_]+(?: [a-z_]+)?)(?=\s*[^:\n]*:)/;
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function hl(t){return t.split("\n").map(function(l){
   var m=l.match(/^(\s*)(#.*)$/);if(m)return esc(m[1])+'<span class="c">'+esc(m[2])+'</span>';
-  var keep=[],put=function(h){keep.push(h);return "\u0001"+(keep.length-1)+"\u0002";};
+  var keep=[],put=function(h){keep.push(h);return String.fromCharCode(0xE000+keep.length-1);};
   var o=l;
   o=o.replace(/"[^"]*"/g,function(x){return put('<span class="s">'+esc(x)+'</span>');});
   o=o.replace(/(\s)(#.*)$/,function(_,a,b){return a+put('<span class="c">'+esc(b)+'</span>');});
   o=o.replace(/\b(?:mcp|a2a):\/\/[^\s,)]+/g,function(x){return put('<span class="u">'+esc(x)+'</span>');});
   o=o.replace(/^@juxt/,function(x){return put('<span class="k">'+x+'</span>');});
   o=o.replace(/^([a-z_]+(?: [a-z_]+)?)( [a-z_\-]+)?(:)/,function(_,a,b,c){return put('<span class="k">'+a+'</span>'+(b?'<span class="n">'+b+'</span>':'')+c);});
-  o=o.replace(/\b(MUST NOT|MUST|SHOULD NOT|SHOULD|OPEN)\b/g,function(x){return put('<span class="lv">'+x+'</span>');});
+  o=o.replace(/\b(MUST NOT|MUST|SHOULD NOT|SHOULD|OPEN)\b/g,function(x){var c=x==="MUST NOT"||x==="SHOULD NOT"?"lvn":x==="MUST"?"lv":x==="SHOULD"?"lvs":"lvo";return put('<span class="'+c+'">'+x+'</span>');});
+  o=o.replace(/(^|[\s(<>=,])(\$?\d+(?:\.\d+)?(?:ms|m|h|d|k|%)?)(?=[\s,)]|$)/g,function(_,a,b){return a+put('<span class="m">'+esc(b)+'</span>');});
   o=o.replace(/=>|~>|->/g,function(x){return put('<span class="o">'+esc(x)+'</span>');});
   o=esc(o);
-  return o.replace(/\u0001(\d+)\u0002/g,function(_,i){return keep[+i];});}).join("\n");}
+  return rs(o,keep);}).join("\n");}
 document.querySelectorAll("pre[data-jx]").forEach(function(p){p.innerHTML=hl(p.textContent);});
+var JXP='<span class="pr"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="11" fill="#F7DF1E"/><g transform="translate(24 24) scale(.8) translate(-22.75 -23.25)"><path d="M19 17 V34 a6.5 6.5 0 0 1 -12 3" fill="none" stroke="#111" stroke-width="4.6" stroke-linecap="round"/><circle cx="19" cy="9.5" r="3" fill="#111"/><path d="M27.5 6.5 L38.5 17.5 M38.5 6.5 L27.5 17.5" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/></g></svg>❯</span>';
+function rs(o,keep){var g=0;while(/[\uE000-\uF8FF]/.test(o)&&g++<5)o=o.replace(/[\uE000-\uF8FF]/g,function(ch){return keep[ch.charCodeAt(0)-0xE000];});return o;}
+var KWS={js:"const|let|var|function|return|if|else|require|new|of|in|for|process",py:"import|from|def|return|if|else|for|in|raise|as|with|not|and|or|None|True|False",rs:"use|fn|let|mut|pub|struct|impl|for|in|if|else|return|match|Ok|Err|Result|Box|dyn|as",yml:"on|jobs|steps|uses|with|run|runs-on"};
+function gen(t,lang){var kw=KWS[lang]?new RegExp("\\b("+KWS[lang]+")\\b","g"):null;
+ return t.split("\n").map(function(l){var keep=[],put=function(h){keep.push(h);return String.fromCharCode(0xE000+keep.length-1);};var o=l;
+  if(lang==="sh"&&/^npx /.test(o)){o=o.replace(/^/,put(JXP));}
+  if(lang==="json")o=o.replace(/^(\s*)("[^"]*")(\s*:)/,function(_,a,b,c){return a+put('<span class="f">'+esc(b)+'</span>')+c;});
+  o=o.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`)/g,function(x){return put('<span class="s">'+esc(x)+'</span>');});
+  var cm=lang==="py"||lang==="sh"||lang==="yml"?/(#.*)$/:/(\/\/.*)$/;o=o.replace(cm,function(x){return put('<span class="c">'+esc(x)+'</span>');});
+  if(lang==="sh")o=o.replace(/\b(juxt-lang)\b/g,function(x){return put('<span class="k">'+x+'</span>');}).replace(/\b(init|lint|ir|php2shell|digest)\b/g,function(x){return put('<span class="f">'+x+'</span>');});
+  if(lang==="json")o=o.replace(/^(\s*)("[^"]*")(\s*:)/,function(_,a,b,c){return a+put('<span class="f">'+esc(b)+'</span>')+c;});
+  if(lang==="diag")o=o.replace(/\berror\b/g,function(x){return put('<span class="er">'+x+'</span>');}).replace(/^(\S+:\d+)/,function(x){return put('<span class="f">'+x+'</span>');});
+  if(kw)o=o.replace(kw,function(x){return put('<span class="k">'+x+'</span>');});
+  o=o.replace(/\b(\d+(?:\.\d+)?)\b/g,function(x){return put('<span class="m">'+x+'</span>');});
+  o=o.replace(/\b([A-Za-z_][\w]*)(?=\()/g,function(x){return put('<span class="f">'+x+'</span>');});
+  return rs(esc(o),keep);}).join("\n");}
+document.querySelectorAll("pre[data-lang]").forEach(function(p){p.innerHTML=gen(p.textContent,p.dataset.lang);});
+
 var q=document.getElementById("lxQ"),t=document.getElementById("lxT"),cnt=document.getElementById("lxCount");
 if(q&&t){var g="all",rows=[].slice.call(t.tBodies[0].rows),chips=[].slice.call(document.querySelectorAll(".lx-chip"));
  var base=cnt.textContent.replace(/^\d+ shown/,"");
