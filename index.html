@@ -244,6 +244,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .meter .save b{color:var(--pass)}
 
 /* films */
+.launch-frame{border-radius:22px;overflow:hidden;background:#111;box-shadow:0 40px 90px -40px rgba(0,0,0,.55);border:1px solid var(--line);line-height:0}
+.launch-frame video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#111}
+.launch-sub{margin-top:14px;color:var(--mute);font-size:14px}
+.launch-sub code{font-family:var(--f-mono);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:12.5px}
 .films{display:grid;gap:14px}
 .ftabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .ftab{text-align:left;font:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;display:grid;gap:4px;color:var(--ink);position:relative;overflow:hidden}
@@ -964,6 +968,23 @@ html.hl-js h2 em.s.hl-on{background-size:100% 34%}
     </div>
   </div>
 </div>
+
+<section id="launch" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="label"><b>Launch film</b> · 48 seconds · sound on</div>
+      <h2>Many minds. <em class="s">One intent.</em></h2>
+      <p class="lede">A hand-drawn launch film: six agents in tangled harnesses, one <code>use juxt</code>, a live PHP2Shell server patched after it asks and proved after it patches, then the language compiling into an agent&nbsp;→&nbsp;agent&nbsp;→&nbsp;agent pipeline. Deterministic animation and a score, both made in code.</p>
+    </div>
+    <div class="launch-frame rv">
+      <video id="launchVid" controls preload="none" playsinline poster="launch-poster.png" width="1920" height="1080">
+        <source src="launch.mp4" type="video/mp4">
+        Your browser can't play the launch film. <a href="launch.mp4">Download it</a>.
+      </video>
+    </div>
+    <p class="launch-sub rv">Prefer vertical? A 9:16 cut is in <a href="https://github.com/juxt-lang/juxt-lang.github.io/blob/main/launch-9x16.mp4">the repo</a>. · <code>npx juxt-lang init</code> · Created by Amit N</p>
+  </div>
+</section>
 
 <section id="films">
   <div class="wrap">
