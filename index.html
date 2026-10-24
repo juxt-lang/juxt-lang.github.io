@@ -766,6 +766,14 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 .ps-share{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;font-weight:600}
 .ps-note{font-size:13px;color:var(--mute);margin-top:18px;max-width:900px}
 @media (max-width:820px){.ps-steps,.ps-grid{grid-template-columns:1fr}.ps-strip{font-size:13px}}
+.ps-run2{display:grid;grid-template-columns:1fr 1.15fr;gap:16px;margin-top:18px}
+.ps-msg pre,.ps-pane pre{margin:0;background:#111;color:#F7DF1E;border-radius:12px;padding:14px 16px;font:600 13.5px/1.6 var(--f-mono);white-space:pre-wrap;word-break:break-word}
+.ps-msg pre{color:#EDEDED;font-weight:500}
+.ps-cp{margin-top:10px;min-height:38px;padding:6px 14px}
+.ps-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ps-tab{font:600 13px var(--f-sans);border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;min-height:36px}
+.ps-tab[aria-selected="true"]{background:#F7DF1E;border-color:#111}
+@media (max-width:820px){.ps-run2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1529,6 +1537,35 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
       <div class="card ps-step"><b>1</b><h3>Add Juxt to the repo</h3><code>npx juxt-lang init</code><p>Installs the Juxt skill for Codex, Claude Code, Cursor or Gemini CLI.</p></div>
       <div class="card ps-step"><b>2</b><h3>Add the fix program</h3><code>npx juxt-lang fix php2shell</code><p>Writes <code>juxt/php2shell.juxt</code>, shown below.</p></div>
       <div class="card ps-step"><b>3</b><h3>Tell your agent</h3><code>use juxt: run juxt/php2shell.juxt</code><p>It reports, asks for your OK, updates, restarts and verifies.</p></div>
+    </div>
+    <div class="ps-run2">
+      <div class="card ps-card">
+        <h3>Ask your AI to do it</h3>
+        <p class="ps-mute">Paste this one message into Claude Code, Codex, Cursor, Gemini CLI or any agent that can run commands in your project or on your server.</p>
+        <div class="ps-msg"><pre id="psOne">Run npx -y juxt-lang init and npx -y juxt-lang fix php2shell in this project, then follow juxt/php2shell.juxt exactly: show me what you find and the commands you plan to run, and wait for my OK before changing anything.</pre><button class="btn ps-cp" type="button">Copy message</button></div>
+        <p class="ps-mute" style="margin-top:12px">Claude Code users can also install the plugin once: <code>/plugin marketplace add juxt-lang/juxt</code> then <code>/plugin install juxt@juxt-lang</code>, and say <code>use juxt: run juxt/php2shell.juxt</code>.</p>
+      </div>
+      <div class="card ps-card">
+        <h3>Or run it from a terminal</h3>
+        <div class="ps-tabs" role="tablist"><button class="ps-tab" type="button" role="tab" aria-selected="true" data-i="0">Claude Code</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="1">Codex</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="2">Gemini CLI</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="3">Cursor</button><button class="ps-tab" type="button" role="tab" aria-selected="false" data-i="4">No Node on the server</button></div>
+        <div class="ps-pane"><pre>cd your-project
+npx -y juxt-lang init --host claude
+npx -y juxt-lang fix php2shell
+claude &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
+npx -y juxt-lang init
+npx -y juxt-lang fix php2shell
+codex &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
+npx -y juxt-lang init --host gemini
+npx -y juxt-lang fix php2shell
+gemini -i &quot;use juxt: run juxt/php2shell.juxt&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>cd your-project
+npx -y juxt-lang init --host cursor
+npx -y juxt-lang fix php2shell
+# then in Cursor&#x27;s agent chat:
+use juxt: run juxt/php2shell.juxt</pre><button class="btn ps-cp" type="button">Copy commands</button></div><div class="ps-pane" hidden><pre>curl -fsSLo php2shell.juxt https://raw.githubusercontent.com/juxt-lang/juxt/main/examples/php2shell.juxt
+# paste the file into your AI agent, or:
+claude &quot;Follow this Juxt program exactly: $(cat php2shell.juxt)&quot;</pre><button class="btn ps-cp" type="button">Copy commands</button></div>
+        <p class="ps-mute" style="margin-top:10px">Needs Node 18 or newer for <code>npx</code>. The agent always asks before it changes anything.</p>
+      </div>
     </div>
     <p class="ps-alt"><b>Nothing to install?</b> Juxt is plain text. Copy the program and paste it into any AI agent that can run commands on your server.</p>
     <div class="card ps-prog">
@@ -2583,5 +2620,9 @@ if(f){f.addEventListener("submit",function(e){e.preventDefault();location.href=b
 <script>(function(){function cp(btn,txt,lbl){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){btn.textContent="Copied";setTimeout(function(){btn.textContent=lbl;},1600);},function(){prompt("Copy:",txt);});}
 var b=document.getElementById("psCopy"),c=document.getElementById("psCode");if(b&&c)b.addEventListener("click",function(){cp(b,c.textContent,"Copy program");});
 var l=document.getElementById("psLink");if(l)l.addEventListener("click",function(){cp(l,"https://juxt-lang.github.io/#/php2shell","Copy link");});})();</script>
+<script>(function(){var r=document.getElementById("php2shell");if(!r)return;
+var t=[].slice.call(r.querySelectorAll(".ps-tab")),p=[].slice.call(r.querySelectorAll(".ps-pane"));
+t.forEach(function(b){b.addEventListener("click",function(){t.forEach(function(x){x.setAttribute("aria-selected",x===b?"true":"false");});p.forEach(function(x,i){x.hidden=String(i)!==b.dataset.i;});});});
+r.querySelectorAll(".ps-cp").forEach(function(b){var l=b.textContent;b.addEventListener("click",function(){var pre=b.parentElement.querySelector("pre");var txt=pre.textContent;(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){b.textContent="Copied";setTimeout(function(){b.textContent=l;},1600);},function(){prompt("Copy:",txt);});});});})();</script>
 </body>
 </html>
