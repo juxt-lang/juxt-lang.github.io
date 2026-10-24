@@ -788,6 +788,14 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 .ps-one-r{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:#fff}.ps-one-r h3{margin:0 0 10px;font-size:18px}
 .ps-one-r .ps-t td:first-child{white-space:nowrap}
 @media (max-width:820px){.ps-one{grid-template-columns:1fr}}
+.ps-case{margin-top:18px;padding:26px}
+.ps-case .label b{background:#F7DF1E;border-radius:999px;padding:2px 8px}
+.ps-case h3{font-size:22px;margin:10px 0 16px}.ps-case h3 a{color:#111}
+.ps-case-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ps-case-g h4{margin:0 0 8px;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+.ps-case-g ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px}
+.ps-case-n{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+@media (max-width:820px){.ps-case-g{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1651,6 +1659,28 @@ returns:
         <h3 style="margin-top:22px">On shared or WordPress hosting?</h3>
         <p class="ps-mute">You usually can't update PHP yourself. Ask your host to confirm they have patched CVE-2026-109618 and CVE-2026-109619, and which PHP version your site now runs.</p>
       </div>
+    </div>
+    <div class="card ps-case">
+      <div class="label"><b>Tested on a real project</b> · a public open-source PHP app, October 2026</div>
+      <h3>We ran it on a clone of <a href="https://github.com/snipe/snipe-it" target="_blank" rel="noopener">Snipe-IT</a>. Here is what happened.</h3>
+      <div class="ps-case-g">
+        <div><h4>Found</h4><ul>
+          <li><code>Dockerfile</code>: Ubuntu 24.04, <code>libapache2-mod-php8.3</code> from apt. Apache mod_php, highest risk.</li>
+          <li><code>Dockerfile.alpine</code>: Alpine 3.24, <code>php84-apache2</code> from apk.</li>
+          <li><code>Dockerfile.fpm-alpine</code>: floating <code>php:8.3-fpm-alpine3.21</code>.</li>
+          <li>Compose and CI workflows on PHP 8.2 to 8.5: low risk.</li></ul></div>
+        <div><h4>Changed, after approval</h4><ul>
+          <li>Ubuntu image: <code>apt-get upgrade</code> added to the build.</li>
+          <li>Alpine image: <code>apk add --upgrade</code>.</li>
+          <li>FPM image pinned: <code>PHP_VERSION=8.3.36</code>.</li>
+          <li>Three small edits. Nothing changed before the plan was approved.</li></ul></div>
+        <div><h4>Honest about the rest</h4><ul>
+          <li>No Docker in the sandbox, so images were not built.</li>
+          <li>Ubuntu and Alpine fixed packages could not be confirmed yet.</li>
+          <li>It warned that the pinned tag may not exist yet.</li>
+          <li>Marked all of it <b>unverified</b>, not "fixed".</li></ul></div>
+      </div>
+      <p class="ps-case-n"><b>The test made the program better.</b> The first run missed PHP installed by apt and apk, and printed the receipt before anything was proven. Both are fixed in juxt-lang 0.4.3: the scout now checks every Dockerfile, compose file, Helm chart, k8s manifest, CI workflow and the host, treats distro-package PHP as in scope with a security-tracker check, and the receipt appears only when every verify check passes. Changes stayed in our sandbox; Juxt-lang is not affiliated with Snipe-IT.</p>
     </div>
     <div class="card ps-teams">
       <div><div class="label"><b>For teams</b> · fleets, compliance, no in-house ops</div>
