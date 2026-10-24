@@ -737,6 +737,9 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 @keyframes jxpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .vs-btn[data-m="with"][aria-selected="true"]{background:#F7DF1E!important;color:#111!important}
 @media (prefers-reduced-motion:reduce){.jxhub{animation:none!important}}
+.ct-mails a{align-items:flex-start}.ct-mails a>span{display:grid;gap:3px}
+.ct-k{font:700 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.ct-a{font:600 15px var(--f-mono)}.ct-d{font:500 13px var(--f-sans);color:var(--mute);word-break:normal}
 </style>
 </head>
 <body>
@@ -1453,7 +1456,7 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
     <div class="sec-head rv">
       <div class="label"><b>Contact</b> · Amit N</div>
       <h2>Talk to the person <em class="s">behind Juxt.</em></h2>
-      <p class="ct-lede">Juxt-lang is created by Amit N (Amit Nilajkar), a software architect working on large-scale systems and machine intelligence. Write about partnerships, enterprise pilots, licensing, press or the book. Every message goes to both inboxes below.</p>
+      <p class="ct-lede">Juxt-lang is created by Amit N (Amit Nilajkar), a software architect working on large-scale systems and machine intelligence. Business enquiries (partnerships, enterprise pilots, investment, licensing, press and the book) go straight to Amit. Project support and automated mail go to the project inbox.</p>
     </div>
     <div class="ct-grid">
       <div class="card ct-card">
@@ -1461,20 +1464,19 @@ builder ⇒ reviewer(fresh) · limits · approval</div>
         <form id="ctForm" class="ct-form" novalidate>
           <label>Topic
             <select id="ctTopic">
-              <option>Partnership</option><option>Enterprise pilot</option><option>Investment</option><option>Licensing or trademark</option><option>Press or speaking</option><option>The Juxt Book</option><option>Something else</option>
+              <optgroup label="Business: to Amit"><option data-to="b">Partnership</option><option data-to="b">Enterprise pilot</option><option data-to="b">Investment</option><option data-to="b">Licensing or trademark</option><option data-to="b">Press or speaking</option><option data-to="b">The Juxt Book</option></optgroup><optgroup label="Project: to the project inbox"><option data-to="p">Bug or support question</option><option data-to="p">Something else</option></optgroup>
             </select>
           </label>
           <label>Your name<input id="ctName" type="text" autocomplete="name" placeholder="Jane Doe"></label>
           <label>Company<input id="ctCo" type="text" autocomplete="organization" placeholder="Optional"></label>
           <label>Message<textarea id="ctMsg" rows="6" placeholder="What would you like to talk about?"></textarea></label>
           <button class="btn primary" type="submit">Open in my email app <span class="arr" aria-hidden="true">→</span></button>
-          <p class="ct-note">This opens your own email app with the message addressed to both of Amit's addresses. Nothing is sent or stored by this site.</p>
+          <p class="ct-note" id="ctTo">This opens your own email app with the message ready to send. Nothing is sent or stored by this site.</p>
         </form>
       </div>
       <div class="card ct-card">
         <h3>Email directly</h3>
-        <div class="ct-mails" id="ctMails"><noscript><p>martian.coders.x [at] gmail.com<br>amit.nilajkar [at] gmail.com</p></noscript></div>
-        <button class="btn ct-copy" id="ctCopy" type="button">Copy both addresses</button>
+        <div class="ct-mails" id="ctMails"><noscript><p>Business: amit.nilajkar [at] gmail.com<br>Project and automated: martian.coders.x [at] gmail.com</p></noscript></div>
         <h3 style="margin-top:28px">Elsewhere</h3>
         <ul class="ct-links">
           <li><a href="https://github.com/juxt-lang" target="_blank" rel="noopener">GitHub · juxt-lang</a></li>
@@ -2441,14 +2443,17 @@ set("without");if(!rm){timer=setInterval(function(){if(auto)set(mode==="with"?"w
 })();</script>
 
 <script>(function(){
-var u=["martian.coders.x","amit.nilajkar"],d="gmail.com",A=u.map(function(x){return x+"@"+d;});
-var box=document.getElementById("ctMails");if(box){box.innerHTML=A.map(function(a){return '<a href="mailto:'+a+'"><i>@</i>'+a+'</a>';}).join("");}
-var all="mailto:"+A.join(",");
-var cp=document.getElementById("ctCopy");if(cp){cp.addEventListener("click",function(){var t=A.join(", ");(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){cp.textContent="Copied";setTimeout(function(){cp.textContent="Copy both addresses";},1600);},function(){prompt("Copy:",t);});});}
-var f=document.getElementById("ctForm");if(f){f.addEventListener("submit",function(e){e.preventDefault();
-var t=document.getElementById("ctTopic").value,n=document.getElementById("ctName").value.trim(),c=document.getElementById("ctCo").value.trim(),m=document.getElementById("ctMsg").value.trim();
-var subj="Juxt-lang: "+t+(c?" · "+c:"");var body=(m||"")+"\n\n"+(n?n:"")+(c?"\n"+c:"");
-location.href=all+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body.trim());});}
+var d="gmail.com",B="amit.nilajkar@"+d,P="martian.coders.x@"+d;
+var box=document.getElementById("ctMails");
+if(box){box.innerHTML=[[B,"Business","Partnerships, enterprise pilots, investment, licensing, press, the book"],[P,"Project","Support questions, notifications and automated mail"]].map(function(r){return '<a href="mailto:'+r[0]+'"><i>@</i><span><b class="ct-k">'+r[1]+'</b><span class="ct-a">'+r[0]+'</span><span class="ct-d">'+r[2]+'</span></span></a>';}).join("");}
+var f=document.getElementById("ctForm"),sel=document.getElementById("ctTopic"),note=document.getElementById("ctTo");
+function to(){var o=sel.options[sel.selectedIndex];return o&&o.dataset.to==="p"?P:B;}
+function upd(){if(note)note.textContent="Goes to "+(to()===B?"Amit directly":"the project inbox")+". This opens your own email app with the message ready to send; nothing is sent or stored by this site.";}
+if(sel){sel.addEventListener("change",upd);upd();}
+if(f){f.addEventListener("submit",function(e){e.preventDefault();
+var t=sel.value,n=document.getElementById("ctName").value.trim(),c=document.getElementById("ctCo").value.trim(),m=document.getElementById("ctMsg").value.trim();
+var subj="Juxt-lang: "+t+(c?" · "+c:"");var body=((m||"")+"\n\n"+n+(c?"\n"+c:"")).trim();
+location.href="mailto:"+to()+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);});}
 })();</script>
 </body>
 </html>
