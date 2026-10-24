@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://juxt-lang.github.io/sitemap.xml
