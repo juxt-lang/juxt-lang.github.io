@@ -631,10 +631,6 @@ details.tbl td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;whi
   .metric{grid-template-columns:90px minmax(0,1fr) 58px}
   .code{font-size:12px}
 }
-@media (prefers-reduced-motion:reduce){
-  *:not(.cartoon *),*::before,*::after{animation:none!important;transition:none!important}
-  .js .rv.pre{opacity:1;transform:none}
-}
 @media (max-width:1000px){ .alt,.pb,.tiers,.bench{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:620px){ .chart-wrap svg{min-width:0} .pb-pane{min-height:0} }
 
@@ -740,7 +736,7 @@ a.ver:hover{box-shadow:0 0 0 2px #111}
 .hero-art:not(.without) .jxhub{animation:jxpulse 2.4s ease-in-out infinite}
 @keyframes jxpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .vs-btn[data-m="with"][aria-selected="true"]{background:#F7DF1E!important;color:#111!important}
-@media (prefers-reduced-motion:reduce){.jxhub{animation:none!important}}
+
 .ct-mails a.ct-main{align-items:flex-start}.ct-mails a.ct-main>span{display:grid;gap:3px}
 .ct-k{font:700 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
 .ct-a{font:600 15px var(--f-mono)}.ct-d{font:500 13px var(--f-sans);color:var(--mute);word-break:normal}
@@ -886,7 +882,7 @@ html.hl-js h2 em.s{background-image:linear-gradient(#F7DF1E,#F7DF1E);background-
 html.hl-js h2 em.s.hl-on{background-size:100% 34%}
 .band h2 em.s{background-image:none!important}
 .sec-head .label b{background:#111;color:#F7DF1E;border-radius:999px;padding:3px 10px;letter-spacing:.08em}
-@media (prefers-reduced-motion:reduce){html.hl-js h2 em.s{transition:none;background-size:100% 34%}}
+
 .lx-tabs{justify-content:flex-start;gap:6px;padding:8px 10px}
 .lx-tab{font:600 12.5px var(--f-mono);border:1px solid #3a3a3a;background:transparent;color:#cfcfcf;border-radius:999px;padding:6px 12px;cursor:pointer;min-height:34px}
 .lx-tab[aria-selected="true"]{background:#F7DF1E;color:#111;border-color:#F7DF1E}
@@ -1207,12 +1203,12 @@ I haven't written any code yet.</span></pre>
       <p class="lede">A calm, narrated introduction with an original guide character. From a prompt-and-hope to one written intent — objective, rules and the checks that prove it — then one program across every tool you already use.</p>
     </div>
     <div class="launch-frame rv">
-      <video id="guidedVid" controls preload="none" playsinline poster="guided-poster.png" width="1920" height="1080">
+      <video id="guidedVid" controls muted preload="metadata" playsinline poster="guided-poster.png" width="1920" height="1080">
         <source src="guided.mp4" type="video/mp4">
         Your browser can't play the film. <a href="guided.mp4">Download it</a>.
       </video>
     </div>
-    <p class="launch-sub rv">Voice and score synthesised in code. · <code>npx juxt-lang init</code></p>
+    <p class="launch-sub rv">Plays muted when in view; unmute for the narration. · <code>npx juxt-lang init</code></p>
   </div>
 </section>
 
@@ -1224,7 +1220,7 @@ I haven't written any code yet.</span></pre>
       <p class="lede">The full hand-drawn story: six agents in tangled harnesses, one <code>use juxt</code>, a live PHP2Shell server patched after it asks and proved after it patches, then the language compiling into an agent&nbsp;→&nbsp;agent&nbsp;→&nbsp;agent pipeline. Plays silent.</p>
     </div>
     <div class="launch-frame rv">
-      <video id="launchVid" controls preload="none" playsinline poster="launch-poster.png" width="1920" height="1080">
+      <video id="launchVid" controls muted loop preload="metadata" playsinline poster="launch-poster.png" width="1920" height="1080">
         <source src="launch.mp4" type="video/mp4">
         Your browser can't play the launch film. <a href="launch.mp4">Download it</a>.
       </video>
@@ -2194,7 +2190,7 @@ returns:
 <script>
 (function(){
 document.documentElement.classList.add('js');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce = false; // animations always play; Pause controls remain
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 /* ---------- program ---------- */
@@ -2645,9 +2641,9 @@ bar.addEventListener('click',e=>{ const r=bar.getBoundingClientRect(); if(!r.wid
 bar.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); const was=playing; pause(); seek(t+(e.key==='ArrowRight'?5000:-5000)); if(was) play(); }});
 seek(reduce?37000:0);
 if(!reduce && 'IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting && !started){ started=true; play(); } else if(!e.isIntersecting && playing){ pause(); started=false; } }),{threshold:.45});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting && !started){ started=true; play(); } else if(!e.isIntersecting && playing){ pause(); started=false; } }),{threshold:.25});
   io.observe(g('fscreen'));
-}
+}else{ play(); }
 ui();
 })();
 
@@ -3125,11 +3121,11 @@ document.getElementById('copyStarter').addEventListener('click',()=>{
   route();
 })();
 </script>
-<script>(function(){var a=document.getElementById("heroArt"),b=document.getElementById("cplay");if(!a||!b)return;var v=a.querySelector("svg.cartoon");function set(on){try{on?v.unpauseAnimations():v.pauseAnimations();}catch(e){}a.classList.toggle("paused",!on);b.textContent=on?"Pause":"Play animation";b.setAttribute("aria-pressed",on?"false":"true");}b.addEventListener("click",function(){set(a.classList.contains("paused"));});var rm=false;try{rm=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}if(rm){try{v.setCurrentTime(5.6);}catch(e){}set(false);}})();</script><script>(function(){var a=document.getElementById("heroArt");if(!a)return;var bs=[].slice.call(a.querySelectorAll(".vs-btn")),st=[].slice.call(a.querySelectorAll(".vs-stats b"));var auto=true,mode="with",timer=null;
+<script>(function(){var a=document.getElementById("heroArt"),b=document.getElementById("cplay");if(!a||!b)return;var v=a.querySelector("svg.cartoon");function set(on){try{on?v.unpauseAnimations():v.pauseAnimations();}catch(e){}a.classList.toggle("paused",!on);b.textContent=on?"Pause":"Play animation";b.setAttribute("aria-pressed",on?"false":"true");}b.addEventListener("click",function(){set(a.classList.contains("paused"));});var rm=false;try{rm=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}})();</script><script>(function(){var a=document.getElementById("heroArt");if(!a)return;var bs=[].slice.call(a.querySelectorAll(".vs-btn")),st=[].slice.call(a.querySelectorAll(".vs-stats b"));var auto=true,mode="with",timer=null;
 function set(m){mode=m;a.classList.toggle("without",m==="without");bs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.m===m?"true":"false");});st.forEach(function(b){b.textContent=m==="without"?b.dataset.w:b.dataset.j;});}
 bs.forEach(function(b){b.addEventListener("click",function(){auto=false;clearInterval(timer);set(b.dataset.m);});});
 var rm=false;try{rm=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
-set("without");if(!rm){timer=setInterval(function(){if(auto)set(mode==="with"?"without":"with");},6400);}else{set("with");}
+set("without");timer=setInterval(function(){if(auto)set(mode==="with"?"without":"with");},6400);
 })();</script>
 
 <script>(function(){
@@ -3231,5 +3227,9 @@ if(q&&t){var g="all",rows=[].slice.call(t.tBodies[0].rows),chips=[].slice.call(d
 var tb=[].slice.call(document.querySelectorAll(".lx-tab")),pn=[].slice.call(document.querySelectorAll(".lx-pane"));
 tb.forEach(function(b){b.addEventListener("click",function(){tb.forEach(function(x){x.setAttribute("aria-selected",x===b?"true":"false");});pn.forEach(function(x,i){x.hidden=String(i)!==b.dataset.i;});});});
 })();</script><!--LX-JS-END-->
+<script>(function(){var vs=["guidedVid","launchVid"].map(function(i){return document.getElementById(i);}).filter(Boolean);
+if(!("IntersectionObserver" in window))return;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}else if(!v.paused){v.pause();}});},{threshold:.5});
+vs.forEach(function(v){v.muted=true;io.observe(v);});})();</script>
 </body>
 </html>
